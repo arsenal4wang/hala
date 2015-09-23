@@ -1,0 +1,4 @@
+com\eshore\khala\product\dao\impl\ProductDaoImpl.class
+com\eshore\khala\product\dao\ICategoryDao.class
+com\eshore\khala\product\dao\impl\CategoryDaoImpl.class
+com\eshore\khala\product\dao\IProductDao.class

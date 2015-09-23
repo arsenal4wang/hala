@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <parent> 
+        <groupId>com.wang.khala</groupId>  
+        <artifactId>demo</artifactId>  
+        <version>1.0.0-SNAPSHOT</version> 
+    </parent>  
+    <artifactId>demo-web</artifactId>  
+    <name>demo-web</name>  
+    <packaging>war</packaging>  
+    <url>http://maven.apache.org</url>  
+    <properties> 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+        <project.type>war</project.type>  
+        <base.package>[]</base.package> 
+    </properties>  
+    <dependencies> 
+        <dependency> 
+            <groupId>junit</groupId>  
+            <artifactId>junit</artifactId>  
+            <scope>test</scope> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-test</artifactId>  
+            <scope>test</scope> 
+        </dependency>  
+        <dependency> 
+            <groupId>javax.servlet</groupId>  
+            <artifactId>jstl</artifactId>  
+            <scope>runtime</scope> 
+        </dependency>  
+        <!-- 引入core-web war包的公共页面文件，如js/css静态文件及公共jsp文件 -->  
+        <!--<dependency>
+            <groupId>com.eshore.khala</groupId>
+            <artifactId>eshore-khala-core-web</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>-->  
+        <dependency> 
+            <groupId>com.wang.khala</groupId>  
+            <artifactId>demo-module-api</artifactId>  
+            <version>${project.parent.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.wang.khala</groupId>  
+            <artifactId>demo-module-controller</artifactId>  
+            <version>${project.parent.version}</version>  
+            <!-- <scope>provided</scope>  -->
+            <!-- 使用dubbo时，服务提供去掉相应的注释 --> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.wang.khala</groupId>  
+            <artifactId>demo-module-service</artifactId>  
+            <version>${project.parent.version}</version>  
+            <!-- <scope>provided</scope>  -->
+            <!-- 使用dubbo时，消费者去掉相应的注释 -->  
+            <exclusions> 
+                <exclusion> 
+                    <artifactId>eshore-khala-core-data-mybatis</artifactId>  
+                    <groupId>com.eshore.khala</groupId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency>  
+        <!-- plugins sysmgr start -->  
+        <!-- 加载系统管理插件， 运行时tomcat是会自动解压出controller jar包的jsp文件 -->  
+        <!-- 访问路径eshore-khala-demo-mybatismodel-web/sysmgr/login -->  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-sysmgr-controller</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-sysmgr-service</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <!-- plugins sysmgr end -->  
+        <!-- plugins pluginmgr start -->  
+        <!-- 加载插件管理插件， 运行时tomcat是会自动解压出controller jar包的jsp文件 -->  
+        <!-- 访问路径类似eshore-khala-core-web/plugins/pluginmgr_mgr_Index_show.htm -->  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-pluginmgr-api</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-pluginmgr-controller</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-pluginmgr-data</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.eshore.khala</groupId>  
+            <artifactId>eshore-khala-plugins-pluginmgr-service</artifactId>  
+            <version>${project.version}</version> 
+        </dependency>  
+        <!-- plugins pluginmgr end -->  
+        <!-- zookeeper start -->  
+        <dependency> 
+            <groupId>org.apache.zookeeper</groupId>  
+            <artifactId>zookeeper</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.101tec</groupId>  
+            <artifactId>zkclient</artifactId> 
+        </dependency>  
+        <!-- zookeeper end -->  
+        <!-- dubbo start -->  
+        <dependency> 
+            <groupId>com.alibaba</groupId>  
+            <artifactId>dubbo</artifactId> 
+        </dependency>  
+        <!-- dubbo end --> 
+    </dependencies>  
+    <build> 
+        <finalName>demo-web</finalName>  
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>  
+        <plugins> 
+            <!-- 引入core-web war包的公共页面文件，如js/css静态文件及公共jsp文件 -->  
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-war-plugin</artifactId>  
+                <!--<configuration>
+                                <workDirectory>${project.build.directory}/eshore-khala-core-web</workDirectory>
+                                <webappDirectory>target/demo-web</webappDirectory>
+                <useCache>false</useCache>
+                <archive>
+                    <addMavenDescriptor>true</addMavenDescriptor>
+                </archive>
+                <overlays>
+                    <overlay>
+                        <groupId>com.eshore.khala</groupId>
+                        <artifactId>eshore-khala-core-web</artifactId>
+                    </overlay>
+                </overlays>
+                <dependentWarExcludes>**/WEB-INF/**,**/META-INF/**,index.jsp</dependentWarExcludes>
+            </configuration>--> 
+            </plugin> 
+        </plugins> 
+    </build> 
+</project>

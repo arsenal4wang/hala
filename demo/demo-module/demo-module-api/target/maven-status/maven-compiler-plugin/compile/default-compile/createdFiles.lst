@@ -1,0 +1,4 @@
+com\eshore\khala\product\service\ICategoryService.class
+com\eshore\khala\product\service\IProductService.class
+com\eshore\khala\product\pojo\Category.class
+com\eshore\khala\product\pojo\Product.class
